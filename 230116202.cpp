@@ -39,6 +39,7 @@ class MyString {
     MyString& assign(const char* str);
 
     bool operator==(const MyString& str);
+    MyString& operator=(const MyString& str);
     MyString operator+(const MyString& str);
     char& operator[](int i);
 
@@ -56,6 +57,16 @@ MyString MyString::operator+(const MyString& str){
   MyString temp(*(this));
   temp.insert(length(),str);
   return temp;
+}
+MyString& MyString::operator=(const MyString& str){
+  string_length = str.length();
+  memory_capacity = str.capacity();
+  string_content = new char[string_length];
+
+  for (int i = 0; i < string_length; i++) 
+    string_content[i] = str.string_content[i];
+  
+  return *this;
 }
 
 char& MyString::operator[](int i){
